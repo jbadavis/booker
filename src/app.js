@@ -1,12 +1,10 @@
-const { Pool } = require("pg");
 const createTables = require("./db/createTables");
+const server = require("./server");
 
 const app = async () => {
-  const pool = new Pool();
+  await createTables();
 
-  createTables(pool);
-
-  await pool.end();
+  server();
 };
 
 module.exports = app;
