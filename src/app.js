@@ -1,10 +1,10 @@
 const { Pool } = require("pg");
+const createTables = require("./db/createTables");
 
 const app = async () => {
   const pool = new Pool();
-  const res = await pool.query("SELECT NOW()");
 
-  console.log("Hey", res);
+  createTables(pool);
 
   await pool.end();
 };
