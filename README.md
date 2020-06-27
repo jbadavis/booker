@@ -23,14 +23,22 @@ npm i
 npm start
 ```
 
-## Curl
+## Example Requests
 
-Example requests can be found below.
+Example cURL requests can be found below.
 
 ### Add User 
 
 ```sh
-curl -d '{"email":"foo@bar.com"}' \
+curl -d '{"email": "foo@bar.com"}' \
     -H "Content-Type: application/json" \
     -X POST http://localhost:3000/users
+```
+
+### Create Booking
+
+```sh
+curl -d '{"userId": "1", "dateTime": "2020-01-01 12:00:00"}' \
+    -H "Content-Type: application/json" \
+    -X POST http://localhost:3000/bookings
 ```
