@@ -10,11 +10,11 @@ const bookings = () => {
     } = req;
 
     try {
-      await createBooking(userId, dateTime);
+      const { rows } = await createBooking(userId, dateTime);
 
-      res.sendStatus(200);
+      res.json(rows[0]);
     } catch (err) {
-      console.log("db error - could not create booking", err);
+      console.log("db error - could not create booking");
 
       res.sendStatus(403);
     }

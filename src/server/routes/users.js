@@ -6,9 +6,9 @@ const users = () => {
 
   router.post("/", async (req, res) => {
     try {
-      await createUser(req.body.email);
+      const { rows } = await createUser(req.body.email);
 
-      res.sendStatus(200);
+      res.json(rows[0]);
     } catch (err) {
       console.log("db error - user already exists");
 

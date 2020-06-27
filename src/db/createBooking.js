@@ -6,7 +6,11 @@ const createBooking = (userId, dateTime) =>
       user_id, 
       date_time, 
       created_at
-    ) values($1, $2, CURRENT_TIMESTAMP)`,
+    ) values(
+      $1, 
+      $2, 
+      CURRENT_TIMESTAMP
+    ) RETURNING *`,
     [userId, dateTime]
   );
 
