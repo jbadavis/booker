@@ -1,8 +1,15 @@
 const express = require("express");
 const createUser = require("../../db/createUser");
+const getUsers = require("../../db/getUsers");
 
 const users = () => {
   const router = express.Router();
+
+  router.get("/", async (req, res) => {
+    const { rows } = await getUsers();
+
+    res.json(rows);
+  });
 
   router.post("/", async (req, res) => {
     try {
@@ -12,7 +19,7 @@ const users = () => {
     } catch (err) {
       console.log("db error - user already exists");
 
-      res.sendStatus(403);
+      res.sendStatus(400);
     }
   });
 
