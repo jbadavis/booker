@@ -1,13 +1,13 @@
 const express = require("express");
-const createBooking = require("../../db/createBooking");
-const getBookings = require("../../db/getBookings");
-const deleteBooking = require("../../db/deleteBooking");
+const db = require("../../db/bookings");
 
 const bookings = () => {
   const router = express.Router();
 
-  router.get("/", async (req, res) => {
-    const { rows } = await getBookings();
+  router.get("/:bookingId?", async (req, res) => {
+    const { rows } = req.params.bookingId
+      ? await db.getBooking(req.params.bookingId)
+      : await db.getBookings();
 
     res.json(rows);
   });
@@ -18,7 +18,7 @@ const bookings = () => {
     } = req;
 
     try {
-      const { rows } = await createBooking(userId, dateTime);
+      const { rows } = await db.createBooking(userId, dateTime);
 
       res.json(rows[0]);
     } catch (err) {
@@ -29,7 +29,7 @@ const bookings = () => {
   });
 
   router.delete("/:bookingId", async (req, res) => {
-    const { rows } = await deleteBooking(req.params.bookingId);
+    const { rows } = await db.deleteBooking(req.params.bookingId);
 
     if (rows.length !== 0) {
       res.json(rows[0]);

@@ -1,19 +1,20 @@
 const express = require("express");
-const createUser = require("../../db/createUser");
-const getUsers = require("../../db/getUsers");
+const db = require("../../db/users");
 
 const users = () => {
   const router = express.Router();
 
-  router.get("/", async (req, res) => {
-    const { rows } = await getUsers();
+  router.get("/:userId?", async (req, res) => {
+    const { rows } = req.params.userId
+      ? await db.getUser(req.params.userId)
+      : await db.getUsers();
 
     res.json(rows);
   });
 
   router.post("/", async (req, res) => {
     try {
-      const { rows } = await createUser(req.body.email);
+      const { rows } = await db.createUser(req.body.email);
 
       res.json(rows[0]);
     } catch (err) {
