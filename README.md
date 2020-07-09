@@ -41,6 +41,12 @@ curl -d '{"email": "foo@bar.com"}' \
     -X POST http://localhost:3000/users
 ```
 
+### Get User
+
+```sh
+curl http://localhost:3000/users/{user_id}
+```
+
 ### Get Users
 
 ```sh
@@ -55,11 +61,24 @@ curl -d '{"userId": "1", "dateTime": "2020-01-01 12:00:00"}' \
     -X POST http://localhost:3000/bookings
 ```
 
+### Get Booking
+
+```sh
+curl http://localhost:3000/bookings/{booking_id}
+```
+
 ### Get Bookings
 
 ```sh
 curl http://localhost:3000/bookings
 ```
+
+### Get Bookings by user
+
+```sh
+curl http://localhost:3000/bookings/user/{user_id}
+```
+
 ### Delete Booking
 
 ```sh
