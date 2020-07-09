@@ -12,6 +12,12 @@ const bookings = () => {
     res.json(rows);
   });
 
+  router.get("/user/:userId", async (req, res) => {
+    const { rows } = await db.getBookingsByUser(req.params.userId);
+
+    res.json(rows);
+  });
+
   router.post("/", async (req, res) => {
     const {
       body: { dateTime, userId },

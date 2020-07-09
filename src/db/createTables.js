@@ -19,6 +19,11 @@ const createTables = async () => {
     )`
   );
 
+  await pool.query(
+    `CREATE INDEX IF NOT EXISTS booking_user
+      ON bookings (user_id)`
+  );
+
   await pool.end();
 };
 

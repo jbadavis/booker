@@ -24,9 +24,13 @@ const getBooking = (bookingId) =>
 
 const getBookings = () => db.query("SELECT * FROM bookings");
 
+const getBookingsByUser = (userId) =>
+  db.query(`SELECT * FROM bookings WHERE user_id = $1`, [userId]);
+
 module.exports = {
   createBooking,
   deleteBooking,
   getBooking,
   getBookings,
+  getBookingsByUser,
 };
